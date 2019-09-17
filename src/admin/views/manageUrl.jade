@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    button(type="submit" class="btn btn-outline-primary" id="addUrl") add url
+    div.formContainer
+        form(action="", method="POST" id="form")
+            input(type="text", name="search" id="search")
+            for result in url.body
+                div(class="input-group mb-3 collapsible") #{result.baseurl}
+                    for urls in result.children
+                        div.collap.col-12
+                            input(type="text", name="id" value='#{JSON.stringify(result.id).replace(/"/g, "")}' hidden="hidden")
+                            input(type="text" class="url form-control" value='#{JSON.stringify(urls.url.url).replace(/"/g, "")}')
+                            div(class="input-group-append")
+                                a(href=`/seeData?url=${urls.url.url}` class="btn btn-primary" role="button") view
+        div
+    script(src="/javascripts/manageUrl.js")

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  crawler:
+    build: ./muncher/
+    links:
+      - 'truelinked_db'
+    environment:
+      NODE_ENV: 'development'
+      API_PORT: '65432'
+    ports:
+      - "65432:65432"
+    command: sh -c "npm run start && npm run db:migrate"
+
+  truelinked_db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./docker/mysql.cnf:/etc/mysql/conf.d/custom.cnf
+      - ./docker/data/mysql/truelinked:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${TRUELINKED_DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${TRUELINKED_DB_NAME}
+      MYSQL_USER: ${TRUELINKED_DB_USER}
+      MYSQL_PASSWORD: ${TRUELINKED_DB_PASSWORD}

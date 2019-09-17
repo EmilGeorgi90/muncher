@@ -1,0 +1,70 @@
+$(document).ready(function(){
+    $('.edit').click(function(e) {
+        event.preventDefault(e)
+        console.log(e)
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": `http://muncher.truelinked.net/updateUrl?url=${e.target.parentElement.previousSibling.value}&id=${e.target.parentElement.previousSibling.previousSibling.value}`,
+            "method": "PUT",
+            "headers": {
+              "Accept": "*/*",
+              "Cache-Control": "no-cache",
+            }
+          }
+          
+          $.ajax(settings).done(function (response) {
+          });
+    })
+    $('#addUrl').click(function(e){
+        event.preventDefault(e);
+        $(e.target.parentElement).prepend('<h4 class="mt-2">add url</h4>')
+        $(e.target.parentElement).prepend('<div class="input-group mb-3"> <input type="text" id="addUrlInput" class="form-control"><div class="input-group-append"><button class="btn btn-outline-secondary" id="addUrlSubmit" type="button">Save Url</button></div></div>')
+        $('#addUrlSubmit').click(function(e){
+            event.preventDefault(e);
+
+            var settings = {
+                "url": `http://muncher.truelinked.net/addUrl?url=${$('#addUrlInput').val()}`,
+                "method": "POST",
+                "headers": {
+                }
+              }
+              
+              $.ajax(settings).done(function (response) {
+                alert('success');
+                console.log(response);
+                settings.url = `http://muncher.truelinked.net/crawler/crawl?url=${$('#addUrlInput').val()}`
+                settings.method = 'GET'
+                $.ajax(settings).done(function () {
+                  location.reload()
+                })
+              });
+        })
+    })
+    $('#search').change(function(e) {
+      var settings = {
+        "url": http://muncher.truelinked.net/manageUrl`/manageUrl?search=${$('#search').val()}`,
+        "method": "GET",
+        "headers": {
+        }
+      }
+      $('.formContainer').load(`http://localhost:3000/manageUrl?search=${$('#search').val()} #form`, function( response, status, xhr ){
+        $(".collapsible").click(function(e) {
+          console.log(e)
+          if($(e.target.children).css('display') !== 'none') {
+            $(e.target.children).hide();
+          } else {
+            $(e.target.children).css({'display': "flex"});
+          } 
+        })
+      })
+    })
+    $(".collapsible").click(function(e) {
+      console.log(e)
+      if($(e.target.children).css('display') !== 'none') {
+        $(e.target.children).hide();
+      } else {
+        $(e.target.children).css({'display': "flex"});
+      } 
+    })
+})

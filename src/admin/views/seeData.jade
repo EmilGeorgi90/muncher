@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    - let resultData = []
+    - function recrusive(json) {if(json){ if(json.children) { for(children of json.children) {  recrusive(children)  }  }   else {  if(json.text) {console.log(json); return resultData.push(json.text + '\n') } else { return}     }}else{ return null}    }
+
+    form(action="", method="POST")
+        for result in url
+            div(class="form-group")
+                div(class="input-group mb-3")
+                    input(type="text", name="id" value='#{JSON.stringify(result.id).replace(/"/g, "")}' hidden="hidden")
+                    input(type="text" class="form-control" value="#{result.url}")
+                    div(class="input-group-append")
+                        button(class="btn btn-outline-secondary" type="button" class="edit") Edit
+                        a(href=`/trainer?url=${result.url}` class="btn btn-primary" role="button") view
+                for logs in result.logs
+                    p(hidden="hidden") !{JSON.parse(logs.data).body ? recrusive(JSON.parse(logs.data).body) : resultData.push(JSON.stringify(logs.data + '\n'))}
+                    div
+                        textarea(name="", class="form-control" cols="30", rows="10" id="comment") #{resultData}
+                    - resultData = []
+    script(src="/javascripts/manageUrl.js")

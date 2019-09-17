@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    button(type="submit" id="showResult") show result
+
+    div(id="loader")
+    div(id="dialog")
+        form(action="" id="inputForm")
+            input(type="textarea" name="name" id="name")
+            select(name="professionqQalification" id="professionQualification")
+                option(value="" disabled) Profession qualification
+                option(value="Composer") Composer
+                option(value="Venue") Venue
+                option(value="Dateandtime") Date and time
+                option(value="Worktitle") Work title
+                option(value="role") Role
+                option(value="Conductor") Conductor
+                option(value="Singer") Singer
+                option(value="StageDirector") Stage Director
+                option(value="SetDesginerScenographer") Set Desginer, Scenographer
+                option(value="CostumeDesign") Costume Design
+                option(value="LightingDesigner") Lighting Designer
+                option(value="Visualist") Visualist
+                option(value="Instrumentist") Instrumentist
+                option(value="Other") Other
+                option(value="selector") Selector
+            select(name="singer" id="singer")
+            select(name="art" id="art")
+            input(type="submit" value="submit" id="submit")
+    div(id="results")
+        textarea(name="dump" id="dump" cols="30" rows="10")
+        button(type="submit" id="saveData") save data
+        a(href="/") back
+    script(src="/javascripts/Trainer.js")
