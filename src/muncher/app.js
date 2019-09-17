@@ -1,8 +1,6 @@
 ﻿const express = require('express');
 const bodyParser = require('body-parser');
-// const mongoose = require('mongoose');
 const routes = require('./routes');
-var cookieParser = require('cookie-parser')
 
 class App {
   constructor() {
@@ -13,7 +11,6 @@ class App {
   }
   config() {
     this.app.use(bodyParser.json());
-    this.app.use(cookieParser())
     this.app.use(function(req, res, next) {
     next();
     });

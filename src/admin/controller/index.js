@@ -2,7 +2,6 @@
 var request = require("request");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-var shell = require('shelljs');
 class dbController {
   async PostData(req, res, next) {
     const url = await db.urls
