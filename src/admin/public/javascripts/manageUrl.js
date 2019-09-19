@@ -1,4 +1,7 @@
 $(document).ready(function(){
+  if(!localStorage.getItem('login')) {
+    window.location.replace('/login')
+  }
   function getUrlVars()
   {
       var vars = [], hash;

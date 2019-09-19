@@ -3,6 +3,14 @@ var request = require("request");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 class dbController {
+  checkLogin(postValues){
+    var loginCred = process.env.LOGIN.split(',')
+    if(loginCred.includes(postValues.username + ':' + postValues.password)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   async PostData(req, res, next) {
     const url = await db.urls
       .findOne({ where: { url: req.query.url } })
