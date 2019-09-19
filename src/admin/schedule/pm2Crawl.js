@@ -1,5 +1,7 @@
-import { crawledPages } from "../../muncher/muncher/muncherFunction";
-
+const Sequelize = require("sequelize");
+const db = require("../models");
+const Op = Sequelize.Op;
+var request = require("request");
 function Crawl() {
   db.urls
     .findAll({
