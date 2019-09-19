@@ -55,6 +55,8 @@ module.exports.digger = async (browser, page, data, selector, depth = 0) => {
         console.log(result)
         return result;
     }, selector);
+    await newPage.waitFor(5000);
+
       anchors = anchors.filter(a => a !== page.url);
       page.title = await newPage.evaluate("document.title");
       page.children = anchors.map(url => ({ url }));
@@ -73,8 +75,12 @@ module.exports.digger = async (browser, page, data, selector, depth = 0) => {
       await newPage.close();
     }
     console.log(page.children)
+    console.log(depth)
+    if(depth > 0) {
+      return data
+    }
     for (const childPage of page.children) {
-      await this.digger(browser, childPage, data, selector,depth + 1);
+      await this.digger(browser, childPage, data, 'body', depth + 1);
     }
     return data;
   };

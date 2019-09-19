@@ -90,6 +90,7 @@ class Muncher {
         "--no-sandbox",
         "--disable-setuid-sandbox"
       ],
+      headless: false,
     });
     let data = [];
     if ((await this.browser.pages()).length > 1) {

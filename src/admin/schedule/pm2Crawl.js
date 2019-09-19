@@ -14,14 +14,15 @@ function Crawl() {
       limit: 1
     })
     .then(data => {
+        console.log(data)
       let urls = data;
       if (urls.length > 0) {
         for (const url of urls) {
-            console.log(process.env.MUNCHER_API)
           if (url.url !== null) {
             request(
               `${process.env.MUNCHER_API}/crawl?url=${url.url}&selector=${url.selector}`,
               (error, response, body) => {
+                  console.log(error, response)
                 if (!error && response.statusCode < 400) {
                   console.log(body);
                   const clientServerOptions = {
@@ -33,7 +34,6 @@ function Crawl() {
                     }
                   };
                   request(clientServerOptions, (error, response, body) => {
-                    console.log(error, response, body);
                   });
                 }
               }
