@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../models");
 const Op = Sequelize.Op;
+require('dotenv').config()
 var request = require("request");
 function Crawl() {
   db.urls
@@ -16,6 +17,7 @@ function Crawl() {
       let urls = data;
       if (urls.length > 0) {
         for (const url of urls) {
+            console.log(process.env.MUNCHER_API)
           if (url.url !== null) {
             request(
               `${process.env.MUNCHER_API}/crawl?url=${url.url}&selector=${url.selector}`,

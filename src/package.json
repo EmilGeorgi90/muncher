@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "web crawler",
   "scripts": {
+    "schedule": "node admin/schedule/pm2Crawl.js",
     "crawler": "node muncher/server.js",
     "admin": "node admin/bin/www ",
     "test": "echo \"Error: no test specified\" && exit 1"
