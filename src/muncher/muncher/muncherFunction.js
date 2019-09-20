@@ -1,6 +1,8 @@
 const puppeteer = require("puppeteer");
 exports.crawledPages = new Map();
 const MAXDEPTH = 30;
+exports.result = []
+
 module.exports.digger = async (browser, page, data, selector, depth = 0) => {
     if (MAXDEPTH == depth) {
       return data;
@@ -71,18 +73,17 @@ module.exports.digger = async (browser, page, data, selector, depth = 0) => {
           source.innerHTML = document.getElementsByTagName("body")[0].innerHTML;
         return func(source);
       }, obj);
-      data.push(source);
+      let number = data.sites.push({sitesUrl: page.url, body: { children: [] }})
+      data.sites[number - 1].body.children.push(source)
       await newPage.close();
     }
-    console.log(page.children)
-    console.log(depth)
     if(depth > 0) {
       return data
     }
     for (const childPage of page.children) {
-      await this.digger(browser, childPage, data, 'body', depth + 1);
+       this.result.push(await this.digger(browser, childPage, data, 'body', depth + 1));
     }
-    return data;
+    return this.result;
   };
   function parse(node) {
     var elm = {};

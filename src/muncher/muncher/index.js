@@ -140,9 +140,8 @@ class Muncher {
       headers: {
         date: new Date()
       },
-      body: {
-        children: []
-      }
+      sites: [{
+      }]
     };
 
     let response = await newPage
@@ -234,8 +233,9 @@ class Muncher {
     //   }
     //   return func(source);
     // }, obj);
-    await helper.digger(this.browser, page, json.body.children, obj.selector);
+    await helper.digger(this.browser, page, json, obj.selector);
     helper.crawledPages.clear();
+    helper.result = [];
     return json;
   }
 }
