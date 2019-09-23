@@ -25,6 +25,7 @@ module.exports.digger = async (browser, page, data, selector, depth = 0) => {
         selector: selector,
       };
       console.log(`Loading: ${page.url}`);
+      console.log(selector)
       const newPage = await browser.newPage();
       await newPage.goto(page.url, { waitUntil: "networkidle0", timeout: 0 });
       await newPage.waitFor(5000);

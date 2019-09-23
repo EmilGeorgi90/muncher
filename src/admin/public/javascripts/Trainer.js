@@ -73,10 +73,10 @@ $(document).ready(function() {
             $("#art").empty();
           }
           if (event.target.value === "selector") {
-            if($(e.target).attr("id")){
-              $("#name").val($(e.target).attr('id')) 
-            } else {
+            if($(e.target).attr("class")){
               $("#name").val('.' + $(e.target).attr('class')) 
+            } else {
+              $("#name").val($(e.target).attr('id')) 
             } 
           }
           if(event.target.value === 'Singer'){

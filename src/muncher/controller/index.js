@@ -17,7 +17,8 @@ class ContactController {
       res.sendFile(data);
     }
      else if(req.query.url !== undefined) {
-      const data = await munch.crawl(req.query.url, req.query.selector, next).catch((error) => {
+       console.log(req.query.selector.substring(0,1) == '.' ? req.query.selector : '#' + req.query.selector)
+      const data = await munch.crawl(req.query.url, req.query.selector.substring(0,1) == '.' ? req.query.selector : '#' + req.query.selector, next).catch((error) => {
         next(error);
         res.send(error)
         process.exit(400);
