@@ -77,11 +77,12 @@ class dbController {
     const savingUrl = {
       orgname: req.query.orgname,
       url: req.query.url,
-      selector: req.query.selector,
+      selector: req.query.selector.substring(0,1) == '.' ? req.query.selector : '#' + req.query.selector,
       last_crawl_at: new Date().setDate(new Date().getDate() -1),
       error_at: null
     };
     const url = await db.urls.create(savingUrl);
+    console.log(url)
     res.send(url);
   }
   async updateUrl(req, res, next) {

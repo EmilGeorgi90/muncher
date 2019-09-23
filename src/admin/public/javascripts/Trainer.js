@@ -74,7 +74,7 @@ $(document).ready(function() {
           }
           if (event.target.value === "selector") {
             if($(e.target).attr("id")){
-              $("#name").val('#' + $(e.target).attr('id')) 
+              $("#name").val($(e.target).attr('id')) 
             } else {
               $("#name").val('.' + $(e.target).attr('class')) 
             } 

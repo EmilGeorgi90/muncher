@@ -22,7 +22,7 @@ function Crawl() {
             request(
               `${process.env.MUNCHER_API}/crawl?url=${url.url}&selector=${url.selector}`,
               (error, response, body) => {
-                  console.log(error, response)
+                  console.log(response.statusCode)
                 if (!error && response.statusCode < 400) {
                   console.log(body);
                   const clientServerOptions = {
