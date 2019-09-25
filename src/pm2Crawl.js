@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const db = require("../models");
+const db = require("./admin/models");
 const Op = Sequelize.Op;
 require('dotenv').config()
 var request = require("request");
