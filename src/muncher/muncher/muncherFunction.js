@@ -75,7 +75,8 @@ module.exports.digger = async (browser, page, data, selector, depth = 0) => {
         return func(source);
       }, obj);
       let number = data.sites.push({sitesUrl: page.url, body: { children: [] }})
-      data.sites[number].body.children.push(source)
+      console.log(data.sites)
+      data.sites[number -1].body.children.push(source)
       await newPage.close();
     }
     if(depth > 0) {

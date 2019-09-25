@@ -34,6 +34,7 @@ function Crawl() {
                     }
                   };
                   request(clientServerOptions, (error, response, body) => {
+                      console.log(response, body, error);
                   });
                 }
               }
